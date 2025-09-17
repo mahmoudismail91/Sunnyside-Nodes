@@ -5,80 +5,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sunnyside Nodes</title>
     <style>
+        /* --- Base & Dark Theme --- */
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            line-height: 1.6;
+            font-family: 'VT323', monospace; /* Pixelated, retro font */
+            line-height: 1.8;
             margin: 0;
-            padding: 0;
-            background-color: #f8f8f8;
-            color: #333;
+            padding: 20px;
+            background-color: #000;
+            color: #00ff41; /* Neon Green Text */
+            text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41;
+            overflow-x: hidden; /* Prevents horizontal scroll from glitch effect */
         }
+
         .container {
             max-width: 800px;
             margin: 40px auto;
             padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: rgba(10, 10, 10, 0.8);
+            border: 1px solid #00ff41;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
         }
+
         h1, h2 {
-            color: #111;
-            border-bottom: 2px solid #eee;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            border-bottom: 1px solid #00ff41;
             padding-bottom: 10px;
         }
-        h1 {
-            font-size: 2.5em;
-        }
-        h2 {
-            font-size: 1.8em;
-            margin-top: 40px;
-        }
-        .subtitle {
-            font-style: italic;
-            color: #666;
-            text-align: center;
-            margin-top: -10px;
-            margin-bottom: 30px;
-        }
-        p {
-            margin-bottom: 1em;
-        }
+
         a {
-            color: #007BFF;
+            color: #00ffff; /* Cyan links */
             text-decoration: none;
+            text-shadow: 0 0 5px #00ffff;
         }
         a:hover {
             text-decoration: underline;
+            background-color: #00ff41;
+            color: #000;
+            text-shadow: none;
         }
+
         .artist-list {
             list-style: none;
             padding: 0;
         }
         .artist-list li {
             margin-bottom: 10px;
-            font-size: 1.1em;
         }
+
         .header-image {
             width: 100%;
             max-width: 250px;
             display: block;
             margin: 20px auto;
-            border-radius: 4px;
+            border: 1px solid #00ff41;
+            filter: grayscale(1) contrast(2) brightness(0.8);
         }
+
         blockquote {
             font-style: italic;
-            color: #555;
-            border-left: 4px solid #ccc;
+            border-left: 4px solid #00ffff;
             padding-left: 20px;
             margin: 40px 0;
             text-align: center;
         }
-        blockquote footer {
-            display: block;
-            margin-top: 10px;
-            color: #777;
-            font-size: 0.9em;
+
+        /* --- Noise/Static Overlay Effect --- */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0, rgba(0,0,0,0) 1px, rgba(255,255,255,0.05) 2px, rgba(255,255,255,0.05) 3px),
+                        repeating-linear-gradient(90deg, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(255,255,255,0.03) 3px, rgba(255,255,255,0.03) 4px);
+            opacity: 0.5;
+            z-index: 9999;
+            pointer-events: none;
+            animation: static 0.1s infinite;
         }
+
+        @keyframes static {
+            0%, 100% { background-position: 0 0; }
+            10% { background-position: -5px -5px; }
+            20% { background-position: 5px 5px; }
+            30% { background-position: -10px 10px; }
+            40% { background-position: 10px -10px; }
+            50% { background-position: -5px 10px; }
+            60% { background-position: 5px -5px; }
+            70% { background-position: -10px -10px; }
+            80% { background-position: 10px 5px; }
+            90% { background-position: -5px -10px; }
+        }
+
+        /* --- Text Glitch Effect --- */
+        .glitch {
+            font-size: 2.8em;
+            position: relative;
+            text-align: center;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00c1; /* Magenta */
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #00ffff; /* Cyan */
+            animation: glitch-anim-2 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip-path: inset(15% 0 86% 0); }
+            20% { clip-path: inset(55% 0 24% 0); }
+            40% { clip-path: inset(28% 0 45% 0); }
+            60% { clip-path: inset(89% 0 3% 0); }
+            80% { clip-path: inset(45% 0 46% 0); }
+            100% { clip-path: inset(12% 0 83% 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip-path: inset(79% 0 15% 0); }
+            20% { clip-path: inset(18% 0 71% 0); }
+            40% { clip-path: inset(91% 0 5% 0); }
+            60% { clip-path: inset(34% 0 51% 0); }
+            80% { clip-path: inset(71% 0 2% 0); }
+            100% { clip-path: inset(83% 0 13% 0); }
+        }
+
     </style>
 </head>
 <body>
@@ -86,8 +159,7 @@
     <div class="container">
         
         <header>
-            <h1>Welcome to Sunnyside Nodes</h1>
-            <p class="subtitle">A Pavilion for The Wrong Biennale</p>
+            <h1 class="glitch" data-text="Sunnyside Nodes">Sunnyside Nodes</h1>
         </header>
 
         <main>
@@ -97,39 +169,35 @@
                 <img src="archaic-smile.jpg" alt="A black and white photo of a Greek statue with an archaic smile" class="header-image">
 
                 <p>
-                    [cite_start]Sunnyside Nodes is a virtual town where each institution—a hospital, police department, school, or skate park—hosts a single artistic work[cite: 20]. [cite_start]This space serves as both an architectural metaphor and a unique venue to engage with different artistic perspectives[cite: 21].
+                    Sunnyside Nodes is a virtual town where each institution—a hospital, police department, school, or skate park—hosts a single artistic work. This space serves as both an architectural metaphor and a unique venue to engage with different artistic perspectives.
                 </p>
                 <p>
-                    [cite_start]Our project is rooted in the idea of the <strong>"archaic smile"</strong>—the serene, enigmatic expression found in ancient Greek sculpture[cite: 3]. [cite_start]This smile is not just a facial expression; it embodies a universal aspiration for joy and a deep human connection to beauty and harmony[cite: 4]. [cite_start]We see the archaic smile as the reverse of the "uncanny valley"[cite: 9]. [cite_start]It avoids discomfort by embracing its own artificiality, aiming for <strong>human resonance</strong> rather than a perfect copy of reality[cite: 10, 11].
+                    Our project is rooted in the idea of the "archaic smile"—the serene, enigmatic expression found in ancient Greek sculpture. We see the archaic smile as the reverse of the "uncanny valley," aiming for human resonance rather than a perfect copy of reality.
                 </p>
                 <p>
-                    [cite_start]In the same way, we explore how <strong>Artificial Intelligence</strong> in art can create synthetic gestures that, while artificial, resonate deeply with an audience[cite: 14]. [cite_start]Sunnyside Nodes explores AI's dual role as both an artistic collaborator and a servant to human needs, adding layers of meaning to its "synthetic smiles"[cite: 17].
-                </p>
-                <p>
-                    [cite_start]Ultimately, Sunnyside Nodes is a vision of atemporal beauty, joy, and empathy[cite: 18]. [cite_start]It is a space where the positive side of humanity is amplified, accelerated, and saturated[cite: 19].
+                    In the same way, we explore how Artificial Intelligence in art can create synthetic gestures that, while artificial, resonate deeply with an audience.
                 </p>
             </section>
 
             <section id="artists">
                 <h2>Featured Artists</h2>
-                <p>Explore the work of the talented artists who bring Sunnyside Nodes to life:</p>
                 <ul class="artist-list">
-                    [cite_start]<li><strong>Mahmoud Ismail</strong> - <a href="https://www.mah-mood.com" target="_blank">https://www.mah-mood.com</a> [cite: 22]</li>
-                    [cite_start]<li><strong>Yun Kima</strong> - <a href="https://www.yunkima.com/" target="_blank">https://www.yunkima.com/</a> [cite: 23]</li>
-                    [cite_start]<li><strong>Laura Lizama Palacios</strong> - <a href="https://lauralizama.com" target="_blank">https://lauralizama.com</a> [cite: 24]</li>
-                    [cite_start]<li><strong>Kano Yukang Tao</strong> - <a href="https://yukangtao.com" target="_blank">https://yukangtao.com</a> [cite: 25]</li>
-                    [cite_start]<li><strong>Marlena Jonane</strong> - <a href="https://www.instagram.com/visualmar" target="_blank">https://www.instagram.com/visualmar</a> [cite: 26]</li>
-                    [cite_start]<li><strong>Mano Leyrado</strong> - <a href="https://linktr.ee/m4n0" target="_blank">https://linktr.ee/m4n0</a> [cite: 27]</li>
-                    [cite_start]<li><strong>Chiara Kristler</strong> - <a href="https://klarerkristler.com" target="_blank">https://klarerkristler.com</a> [cite: 28]</li>
-                    [cite_start]<li><strong>Marcin Ratajczyk</strong> - <a href="https://marcinratajczyk.com" target="_blank">https://marcinratajczyk.com</a> [cite: 29]</li>
-                    [cite_start]<li><strong>Yan Chmarau</strong> - <a href="https://www.instagram.com/yanchmarau" target="_blank">https://www.instagram.com/yanchmarau</a> [cite: 30, 31]</li>
-                    [cite_start]<li><strong>Carolina Ovando</strong> - <a href="https://pazcarolina.com" target="_blank">https://pazcarolina.com</a> [cite: 32]</li>
+                    <li><strong>Mahmoud Ismail</strong> - <a href="https://www.mah-mood.com" target="_blank">https://www.mah-mood.com</a></li>
+                    <li><strong>Yun Kima</strong> - <a href="https://www.yunkima.com/" target="_blank">https://www.yunkima.com/</a></li>
+                    <li><strong>Laura Lizama Palacios</strong> - <a href="https://lauralizama.com" target="_blank">https://lauralizama.com</a></li>
+                    <li><strong>Kano Yukang Tao</strong> - <a href="https://yukangtao.com" target="_blank">https://yukangtao.com</a></li>
+                    <li><strong>Marlena Jonane</strong> - <a href="https://www.instagram.com/visualmar" target="_blank">https://www.instagram.com/visualmar</a></li>
+                    <li><strong>Mano Leyrado</strong> - <a href="https://linktr.ee/m4n0" target="_blank">https://linktr.ee/m4n0</a></li>
+                    <li><strong>Chiara Kristler</strong> - <a href="https://klarerkristler.com" target="_blank">https://klarerkristler.com</a></li>
+                    <li><strong>Marcin Ratajczyk</strong> - <a href="https://marcinratajczyk.com" target="_blank">https://marcinratajczyk.com</a></li>
+                    <li><strong>Yan Chmarau</strong> - <a href="https://www.instagram.com/yanchmarau" target="_blank">https://www.instagram.com/yanchmarau</a></li>
+                    <li><strong>Carolina Ovando</strong> - <a href="https://pazcarolina.com" target="_blank">https://pazcarolina.com</a></li>
                 </ul>
             </section>
 
             <blockquote>
                 <p>"Synthesize me, hypnotise me, humanize me, energize me."</p>
-                [cite_start]<footer>- The Space Lady [cite: 2]</footer>
+                <footer>- The Space Lady</footer>
             </blockquote>
         </main>
 
