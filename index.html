@@ -151,6 +151,51 @@
             80% { clip-path: inset(71% 0 2% 0); }
             100% { clip-path: inset(83% 0 13% 0); }
         }
+        
+        /* --- Game Placeholder Styles --- */
+        .game-placeholder {
+            border: 1px solid #00ff41;
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .loading-text {
+            font-size: 1.5em;
+        }
+
+        .loading-bar-container {
+            width: 80%;
+            height: 20px;
+            border: 1px solid #00ff41;
+            margin: 20px auto;
+            padding: 2px;
+        }
+
+        .loading-bar {
+            width: 0%;
+            height: 100%;
+            background-color: #00ff41;
+            animation: load 4s linear infinite;
+        }
+        
+        .coming-soon {
+            font-size: 2em;
+        }
+
+        .coming-soon::after {
+            content: '_';
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes load {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
 
     </style>
 </head>
@@ -163,6 +208,18 @@
         </header>
 
         <main>
+            <!-- Game Placeholder Section -->
+            <section id="game">
+                <h2>ENTER THE NODE</h2>
+                <div class="game-placeholder">
+                    <div class="loading-text">INITIALIZING VIRTUAL ENVIRONMENT...</div>
+                    <div class="loading-bar-container">
+                        <div class="loading-bar"></div>
+                    </div>
+                    <div class="coming-soon">Coming Soon</div>
+                </div>
+            </section>
+
             <section id="about">
                 <h2>About the Project</h2>
                 
@@ -192,6 +249,8 @@
                     <li><strong>Marcin Ratajczyk</strong> - <a href="https://marcinratajczyk.com" target="_blank">https://marcinratajczyk.com</a></li>
                     <li><strong>Yan Chmarau</strong> - <a href="https://www.instagram.com/yanchmarau" target="_blank">https://www.instagram.com/yanchmarau</a></li>
                     <li><strong>Carolina Ovando</strong> - <a href="https://pazcarolina.com" target="_blank">https://pazcarolina.com</a></li>
+                    <li><strong>Yshar Shirdel</strong> - <a href="https://yasharshirdel.com" target="_blank">https://yasharshirdel.com</a></li>
+                    <li><strong>Sebastiaan Mulder</strong> - <a href="https://de.linkedin.com/in/muldersebastiaan" target="_blank">https://de.linkedin.com/in/muldersebastiaan</a></li>
                 </ul>
             </section>
 
